@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Aha.Dns.Notifications.CloudFunctions": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --port 7072"
+    }
+  }
+}
