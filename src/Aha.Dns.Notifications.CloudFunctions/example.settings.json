@@ -1,0 +1,43 @@
+{
+  "### COMMENT ###": "This file should be filled renamed to local.settings.json. If hosted on azure, the function config should be set to represent all settings in this file.",
+
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  },
+
+  "SummarizedStatisticsApiSettings": {
+    "BaseUrl": "https://url.to.aha.dns.statistics.cloudfunctions",
+    "ApiKey": "<Aha.Dns.Statistics.Cloudfunctions.ApiKey>"
+  },
+
+  "TelegramSettings": {
+    "Token": "<TelegramApiToken>",
+    "TelegramUrl": "https://api.telegram.org",
+    "TelegramChannel": "@<NameOfTelegramChannel>"
+  },
+
+  "TwitterSettings": {
+    "ConsumerKey": "<TwitterConsumerKey>",
+    "ConsumerSecret": "<TwitterConsumerSecret>",
+    "AccessToken": "<TwitterAccessToken>",
+    "AccessTokenSecret": "<TwitterAccessTokenSecret>"
+  },
+
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console" ],
+    "MinimumLevel": "Debug",
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] SourceContext:{SourceContext} {Message:lj}{NewLine}{Exception}"
+        }
+      }
+    ],
+    "Properties": {
+      "Application": "Aha.Dns.Notifications.CloudFunctions"
+    }
+  }
+}

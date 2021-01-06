@@ -1,4 +1,5 @@
 ﻿using Aha.Dns.Notifications.CloudFunctions.ApiClients;
+using Aha.Dns.Notifications.CloudFunctions.NotificationClients;
 using Aha.Dns.Notifications.CloudFunctions.Settings;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -37,9 +38,23 @@ namespace Aha.Dns.Notifications.CloudFunctions
             {
                 configuration.GetSection(SummarizedStatisticsApiSettings.ConfigSectionName).Bind(settings);
             });
+            builder.Services.AddOptions<TelegramSettings>()
+            .Configure<IConfiguration>((settings, configuration) =>
+            {
+                configuration.GetSection(TelegramSettings.ConfigSectionName).Bind(settings);
+            });
+            builder.Services.AddOptions<TwitterSettings>()
+            .Configure<IConfiguration>((settings, configuration) =>
+            {
+                configuration.GetSection(TwitterSettings.ConfigSectionName).Bind(settings);
+            });
 
             // Http client
             builder.Services.AddHttpClient<ISummarizedStatisticsApiClient, SummarizedStatisticsApiClient>();
+            builder.Services.AddHttpClient<INotificationClient, TelegramNotificationClient>();
+
+            // Other clients
+            builder.Services.AddSingleton<INotificationClient, TwitterNotificationClient>();
         }
     }
 }

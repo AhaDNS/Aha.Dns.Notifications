@@ -26,22 +26,15 @@ namespace Aha.Dns.Notifications.CloudFunctions.ApiClients
             _logger = Log.ForContext("SourceContext", nameof(SummarizedStatisticsApiClient));
         }
 
-        public async Task<SummarizedDnsServerStatistics> GetSummarizedDnsServerStatistics(string server)
+        public async Task<SummarizedDnsServerStatistics> GetSummarizedDnsServerStatistics(string server, TimeSpan timeSpan)
         {
             _logger.Debug("Getting summarized statistics for server {Server}", server);
 
             try
             {
-                var queryParameters = new Dictionary<string, string>
-                {
-                    { "code", _summarizedStatisticsApiSettings.ApiKey },
-                    { "server", server },
-                    { "timespan", TimeSpan.FromDays(2).ToString() }
-                };
-
                 var apiUrl = $"{_summarizedStatisticsApiSettings.BaseUrl}/api/SummarizedStatisticsApi";
-                var requestUri = QueryHelpers.AddQueryString(apiUrl, queryParameters);
-                _logger.Debug("Sending GET -> {Url}", apiUrl);
+                var requestUri = QueryHelpers.AddQueryString(apiUrl, CreateQueryParameters(server, timeSpan));
+                _logger.Debug("Sending GET -> {Url} for time span {TimeSpan}", apiUrl, timeSpan);
 
                 var httpResponse = await _httpClient.GetAsync(requestUri);
                 httpResponse.EnsureSuccessStatusCode();
@@ -58,6 +51,16 @@ namespace Aha.Dns.Notifications.CloudFunctions.ApiClients
                 _logger.Error(e, "Got an unhandled exception while fetching summarized statistics for server {server}", server);
                 throw;
             }
+        }
+
+        private Dictionary<string, string> CreateQueryParameters(string server, TimeSpan timeSpan)
+        {
+            return new Dictionary<string, string>
+            {
+                { "code", _summarizedStatisticsApiSettings.ApiKey },
+                { "server", server },
+                { "timespan", timeSpan.ToString() }
+            };
         }
     }
 }
