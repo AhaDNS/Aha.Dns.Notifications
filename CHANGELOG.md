@@ -3,8 +3,8 @@
 All notable changes to this project will be documented in this file.  
 Type of changes can be `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
 
-## [1.0.0] - 2020-12-13
+## [Unreleased]
 
 ### Added
 
-- Initial version of the Aha.Dns.Statistics solution
+- Initial version of the Aha.Dns.Statistics solution that post daily DNS statistics on Twitter and Telegram
