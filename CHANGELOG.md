@@ -7,4 +7,4 @@ Type of changes can be `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Se
 
 ### Added
 
-- Initial version of the Aha.Dns.Statistics solution that post daily DNS statistics on Twitter and Telegram
+- Initial version of the Aha.Dns.Notifications solution that post daily DNS statistics on Twitter and Telegram
