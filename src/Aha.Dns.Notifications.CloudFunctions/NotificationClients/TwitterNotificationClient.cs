@@ -29,7 +29,7 @@ namespace Aha.Dns.Notifications.CloudFunctions.NotificationClients
             {
                 var queriesRequested = summarizedDnsServerStatistics.QueriesRequested.ToString("n0", new CultureInfo("en-US"));
                 var queriesBlocked = summarizedDnsServerStatistics.QueriesBlocked.ToString("n0", new CultureInfo("en-US"));
-                var message = $"During the last {printableTimeSpan}, AhaDNS.com have served {queriesRequested} DNS requests and protected our users from {queriesBlocked} malicious requests!";
+                var message = $"During the last {printableTimeSpan}, AhaDNS.com has served {queriesRequested} DNS requests and protected our users from {queriesBlocked} malicious requests!";
 
                 // For now, just hard-code a few hashtags. Make these configurable later
                 message += "\n\n#AhaDNS #EncryptedDNS #AdBlockDNS #DNS #DNSoverHTTPS #DNSoverTLS #DoH #DoT #adblock #Privacy #Ads #FOSS";

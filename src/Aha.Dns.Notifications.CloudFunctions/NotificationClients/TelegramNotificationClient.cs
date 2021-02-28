@@ -35,7 +35,7 @@ namespace Aha.Dns.Notifications.CloudFunctions.NotificationClients
 
                 var queriesRequested = summarizedDnsServerStatistics.QueriesRequested.ToString("n0", new CultureInfo("en-US"));
                 var queriesBlocked = summarizedDnsServerStatistics.QueriesBlocked.ToString("n0", new CultureInfo("en-US"));
-                var message = $"During the last {printableTimeSpan}, <a href=\"https://ahadns.com\">AhaDNS.com</a> have served <b>{queriesRequested}</b> DNS requests and protected our users from <b>{queriesBlocked}</b> malicious requests!";
+                var message = $"During the last {printableTimeSpan}, <a href=\"https://ahadns.com\">AhaDNS.com</a> has served <b>{queriesRequested}</b> DNS requests and protected our users from <b>{queriesBlocked}</b> malicious requests!";
 
                 var requestBody = new StringContent(JsonConvert.SerializeObject(new TelegramRequest(_telegramSettings.TelegramChannel, "HTML", message)), Encoding.UTF8, "application/json");
                 var telegramResponse = await _httpClient.PostAsync(requestUrl, requestBody);
